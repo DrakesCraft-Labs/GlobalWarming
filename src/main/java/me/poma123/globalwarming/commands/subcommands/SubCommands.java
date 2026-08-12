@@ -17,6 +17,7 @@ public class SubCommands {
         List<SubCommand> commands = new LinkedList<>();
 
         commands.add(new PollutionCommand(plugin, cmd));
+        commands.add(new SilenciarCommand(plugin, cmd));
 
         return commands;
     }

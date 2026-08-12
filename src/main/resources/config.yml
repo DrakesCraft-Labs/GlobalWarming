@@ -7,64 +7,44 @@
 # probabilidad. En un servidor con construcciones eso arrasa terreno ajeno.
 #
 # Lo que SI funciona de serie es el seguimiento: las maquinas contaminan, la temperatura sube y
-# se puede consultar. Enciende los mecanismos de uno en uno cuando quieras, y avisa antes.
+# se puede consultar con el termometro. Enciende los mecanismos de uno en uno, y avisa antes.
 
-# 自动更新
 options:
   auto-update: false
-
-# 启用或禁用的世界
 worlds:
 - disabled_world
-
-# 白名单 (whitelist) 或 黑名单 (blacklist) ，默认为黑名单模式
 world-filter-type: blacklist
-
-# 机制
 mechanics:
-  # 森林大火
+  # Incendios forestales
   FOREST_FIRES:
-    # 是否启用
     enabled: false
-    # 几率 (0-1)
+    # Probabilidad (0-1)
     chance: 0.3
-    # 火焰传播速度
+    # Bloques que arden por segundo
     fire-per-second: 10
-    # 最低触发温度（摄氏度）
+    # Temperatura minima para que salte (grados Celsius)
     min-temperature-in-celsius: 40.0
-  # 冰川融化
+  # Deshielo
   ICE_MELTING:
-    # 是否启用
     enabled: false
-    # 几率 (0-1)
     chance: 0.5
-    # 融化速度
+    # Bloques de hielo que se derriten por segundo
     melt-per-second: 10
-    # 最低触发温度（摄氏度）
     min-temperature-in-celsius: 2.0
-  # 减速
+  # Ralentiza al jugador
   SLOWNESS:
-    # 是否启用
     enabled: false
-    # 几率 (0-1)
     chance: 0.8
-  # 燃烧
+  # Prende fuego al jugador
   BURN:
-    # 是否启用
     enabled: false
-    # 几率
     chance: 0.8
-
-# 进行全球变暖研究需要解锁的前置研究
+# Investigacion necesaria para que los mecanismos afecten al jugador
 needed-research-for-player-mechanics: ENERGY_REGULATOR
-
-# 污染设置
-# 机器相关ID可通过游戏内手持机器并使用指令/sf id查询
-# 原版物品ID: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html
 pollution:
-  # 污染产生
+  # Lo que ENSUCIA
   production:
-    # 机器输入会产生的污染
+    # Contaminacion por material metido en una maquina
     machine-recipe-input-items:
       CHARCOAL: 0.0025
       COAL: 0.005
@@ -80,23 +60,52 @@ pollution:
       BLISTERING_INGOT: 0.025
       BLISTERING_INGOT_2: 0.027
       BLISTERING_INGOT_3: 0.03
-    # 机器运作产生的污染
+    # Contaminacion por maquina en funcionamiento
     machines:
       COAL_GENERATOR: 0.001
       COAL_GENERATOR_2: 0.0015
       NUCLEAR_REACTOR: 0.03
       COMBUSTION_REACTOR: 0.015
-    # 喂养动物产生的污染
+    # Contaminacion por criar animales
     animal-breed: 0.005
-  # 污染吸收
+  # Lo que LIMPIA
   absorption:
-    # 污染吸收机器
+    # Maquinas que absorben contaminacion
     machines:
       AIR_COMPRESSOR: 0.05
-    # 植树
+    # Cada arbol que crece
     tree-growth: 0.005
-
-# 温度选项
 temperature-options:
+  # Cuanto sube la temperatura por punto de contaminacion
   pollution-multiply: 0.002
+  # Cuanto baja durante una tormenta
   temperature-drop-during-storms: 8
+
+# ─────────────────────────────────────────────────────────────────────────────
+#  Fenomenos climaticos
+# ─────────────────────────────────────────────────────────────────────────────
+#
+# El clima cambia el MUNDO, no al jugador. Ningun evento hace daño, ni pone efectos de pocion,
+# ni obliga a buscar refugio, ni castiga por estar AFK. Lo que hacen es mover la temperatura
+# ambiente y el cielo, para que de vez en cuando pase algo y se note.
+#
+# Lo unico que coloca bloques es la nevada, y solo capas de nieve sobre suelo natural con aire
+# encima: nunca sustituye nada construido, y se derrite sola.
+eventos-climaticos:
+  enabled: true
+  # Cada cuanto se tira el dado, en segundos.
+  intervalo-sorteo-segundos: 600
+  # Probabilidad (0-1) de que en ese sorteo empiece algo.
+  probabilidad: 0.35
+  # Cuanto dura, en segundos. Se elige al azar entre los dos.
+  duracion-minima-segundos: 240
+  duracion-maxima-segundos: 600
+  # Si se avisa por chat al empezar y al terminar.
+  anunciar: true
+  # Que fenomenos pueden salir.
+  tipos:
+    ola-de-calor: true
+    ola-de-frio: true
+    nevada: true
+    tormenta: true
+    bochorno: true

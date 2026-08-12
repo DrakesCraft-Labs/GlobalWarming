@@ -158,6 +158,12 @@ public class TemperatureManager {
 
         celsiusValue = celsiusValue + (PollutionManager.getPollutionInWorld(world) * GlobalWarmingPlugin.getRegistry().getPollutionMultiply());
 
+        // Los fenomenos climaticos suman o restan mientras duran. Es lo que hace que una ola de
+        // calor se NOTE en el termometro y no sea solo un mensaje en el chat.
+        if (GlobalWarmingPlugin.getGestorEventos() != null) {
+            celsiusValue = celsiusValue + GlobalWarmingPlugin.getGestorEventos().getDesviacion(world);
+        }
+
         return new Temperature(celsiusValue);
     }
 

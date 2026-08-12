@@ -147,6 +147,12 @@ public class PollutionListener implements Listener {
         }
 
         for (Player p : world.getPlayers()) {
+            // Quien lo haya silenciado con /globalwarming silenciar no recibe nada.
+            if (GlobalWarmingPlugin.getSilenciados() != null
+                    && GlobalWarmingPlugin.getSilenciados().estaSilenciado(p)) {
+                continue;
+            }
+
             p.sendMessage(ChatColors.color(GlobalWarmingPlugin.getMessagesConfig().getString("messages.climate-change").replace("%value%", difference)));
 
             if (news.length() > 0) {

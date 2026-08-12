@@ -3,6 +3,8 @@ package me.poma123.globalwarming;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.EnumMap;
+import java.util.Map;
 import java.util.logging.Level;
 
 import org.bstats.bukkit.Metrics;
@@ -33,6 +35,9 @@ import me.poma123.globalwarming.items.machines.AirCompressor;
 import me.poma123.globalwarming.items.machines.TemperatureMeter;
 import me.poma123.globalwarming.listeners.PollutionListener;
 import me.poma123.globalwarming.listeners.WorldListener;
+import me.poma123.globalwarming.eventos.EventoClimatico;
+import me.poma123.globalwarming.eventos.Silenciados;
+import me.poma123.globalwarming.eventos.GestorEventos;
 import me.poma123.globalwarming.tasks.BurnTask;
 import me.poma123.globalwarming.tasks.FireTask;
 import me.poma123.globalwarming.tasks.MeltTask;
@@ -43,6 +48,8 @@ public class GlobalWarmingPlugin extends JavaPlugin implements SlimefunAddon {
 
     private static GlobalWarmingPlugin instance;
     private static Registry registry = new Registry();
+    private static GestorEventos gestorEventos;
+    private static Silenciados silenciados;
     private final TemperatureManager temperatureManager = new TemperatureManager();
     private final GlobalWarmingCommand command = new GlobalWarmingCommand(this);
     private final Config cfg = new Config(this);
@@ -95,6 +102,8 @@ public class GlobalWarmingPlugin extends JavaPlugin implements SlimefunAddon {
         registerItems();
         registerResearches();
         registry.load(cfg, messages);
+        silenciados = new Silenciados(this);
+
         scheduleTasks();
 
         command.register();
@@ -192,6 +201,32 @@ public class GlobalWarmingPlugin extends JavaPlugin implements SlimefunAddon {
         registerResearch("mercury", 69696973, "Mercurio", 12, Items.CINNABARITE, Items.MERCURY);
     }
 
+    /**
+     * Pone en marcha los fenomenos climaticos.
+     *
+     * Es lo unico "vivo" que le queda al plugin de cara al jugador, y a proposito: cambia el
+     * mundo, no al jugador. Ver eventos/GestorEventos.
+     */
+    private void arrancarEventosClimaticos() {
+        if (!cfg.getOrSetDefault("eventos-climaticos.enabled", true)) {
+            return;
+        }
+
+        Map<EventoClimatico, Boolean> permitidos = new EnumMap<>(EventoClimatico.class);
+        for (EventoClimatico e : EventoClimatico.values()) {
+            permitidos.put(e, cfg.getOrSetDefault("eventos-climaticos.tipos." + e.getClaveConfig(), true));
+        }
+
+        gestorEventos = new GestorEventos(
+                cfg.getOrSetDefault("eventos-climaticos.intervalo-sorteo-segundos", 600),
+                cfg.getOrSetDefault("eventos-climaticos.probabilidad", 0.35),
+                cfg.getOrSetDefault("eventos-climaticos.duracion-minima-segundos", 240),
+                cfg.getOrSetDefault("eventos-climaticos.duracion-maxima-segundos", 600),
+                permitidos,
+                cfg.getOrSetDefault("eventos-climaticos.anunciar", true));
+        gestorEventos.arrancar(1);
+    }
+
     private void scheduleTasks() {
         if (cfg.getBoolean("mechanics.FOREST_FIRES.enabled")) {
             new FireTask(cfg.getOrSetDefault("mechanics.FOREST_FIRES.min-temperature-in-celsius", 40.0),
@@ -214,6 +249,8 @@ public class GlobalWarmingPlugin extends JavaPlugin implements SlimefunAddon {
         if (cfg.getBoolean("mechanics.BURN.enabled")) {
             new BurnTask(cfg.getOrSetDefault("mechanics.BURN.chance", 0.8)).scheduleRepeating(0, 200);
         }
+
+        arrancarEventosClimaticos();
 
         temperatureManager.runCalculationTask(0, 100);
     }
@@ -238,6 +275,16 @@ public class GlobalWarmingPlugin extends JavaPlugin implements SlimefunAddon {
 
     public static TemperatureManager getTemperatureManager() {
         return instance.temperatureManager;
+    }
+
+    /** Los fenomenos climaticos. Null si estan apagados en la configuracion. */
+    /** Quien ha pedido que el clima deje de escribirle. */
+    public static Silenciados getSilenciados() {
+        return silenciados;
+    }
+
+    public static GestorEventos getGestorEventos() {
+        return gestorEventos;
     }
 
     public static GlobalWarmingPlugin getInstance() {
