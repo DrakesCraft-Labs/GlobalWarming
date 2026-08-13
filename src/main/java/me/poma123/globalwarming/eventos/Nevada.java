@@ -21,9 +21,15 @@ import org.bukkit.entity.Player;
  * REGLAS QUE NO SE ROMPEN
  *
  *  - Solo se coloca sobre bloques solidos con aire encima. Nada se sustituye.
- *  - Nunca sobre lo que un jugador pueda haber construido con cuidado: se salta cofres, puertas,
- *    carteles, camas, cultivos y demas. Una nevada que tape una granja no es ambientacion, es un
- *    destrozo.
+ *  - Solo sobre suelo natural SIN TRABAJAR: hierba, tierra, arena, grava, barro. Nada de piedra,
+ *    losas, terracota ni granito.
+ *
+ *    Esto se aprendio en produccion. La primera version aceptaba STONE, DEEPSLATE, TERRACOTTA y
+ *    GRANITE por considerarlos "naturales", y son materiales de CONSTRUCCION: la primera nevada
+ *    dejo nieve encima de las casas de medio servidor. Un jugador pidio ayuda por el chat y otro
+ *    dio por muertos sus cultivos.
+ *
+ *    La regla ahora es al reves: si alguien pudiera haberlo colocado a proposito, no nieva encima.
  *  - Se coloca poca y cerca de quien esta jugando: nadie ve la nieve que cae a 500 bloques, y
  *    colocarla igualmente solo gasta CPU.
  *  - Se derrite sola cuando sube la temperatura. No deja rastro permanente.
@@ -83,6 +89,7 @@ final class Nevada {
      */
     private static boolean esSueloValido(@Nonnull Material tipo) {
         switch (tipo) {
+            // Suelo natural sin trabajar. Nada de esto se coloca a mano para construir.
             case GRASS_BLOCK:
             case DIRT:
             case COARSE_DIRT:
@@ -92,17 +99,11 @@ final class Nevada {
             case SAND:
             case RED_SAND:
             case GRAVEL:
-            case STONE:
-            case ANDESITE:
-            case DIORITE:
-            case GRANITE:
-            case DEEPSLATE:
-            case TUFF:
             case CLAY:
-            case TERRACOTTA:
-            case SNOW_BLOCK:
-            case PACKED_ICE:
+            case MUD:
             case MOSS_BLOCK:
+            case SNOW_BLOCK:
+            case POWDER_SNOW:
                 return true;
             default:
                 return false;
