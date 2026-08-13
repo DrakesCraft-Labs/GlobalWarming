@@ -7,7 +7,6 @@ import java.util.EnumMap;
 import java.util.Map;
 import java.util.logging.Level;
 
-import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -63,7 +62,6 @@ public class GlobalWarmingPlugin extends JavaPlugin implements SlimefunAddon {
             getDescription().getVersion().startsWith("Build")) {
         }
 
-        new Metrics(this, 9132);
 
         final File messagesFile = new File(getDataFolder(), "messages.yml");
         if (!messagesFile.exists()) {
@@ -297,7 +295,7 @@ public class GlobalWarmingPlugin extends JavaPlugin implements SlimefunAddon {
 
     @Override
     public String getBugTrackerURL() {
-        return "https://github.com/GuizhanCraft/GlobalWarming-CN/issues";
+        return "https://github.com/DrakesCraft-Labs/GlobalWarming/issues";
     }
 
     @Override
