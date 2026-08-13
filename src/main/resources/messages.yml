@@ -1,20 +1,53 @@
-# 可用值: CELSIUS, FAHRENHEIT, KELVIN
-# 分别对应: 摄氏度, 华氏度, 开尔文温度
+# Unidad de temperatura. Valores: CELSIUS, FAHRENHEIT, KELVIN
 temperature-scale: CELSIUS
 messages:
-  climate-change: '&c[全球变暖] &e目前全球气温上升了: %value%'
-  # breaking-news: '&c[UNN] &e&n这里是多尼·沃米利安，现在报道一则突发新闻:&3 %news%'
-  breaking-news: '&c[全球变暖] &e&n突发新闻:&3 %news%'
+  climate-change: '&c[Calentamiento Global] &eLa temperatura global ha subido: %value%'
+  breaking-news: '&c[Calentamiento Global] &e&nÚltima hora:&3 %news%'
+
+  # Los titulares salen de donde esta la gente que juega aqui, no de Washington.
+  # Reparto segun las metricas del servidor (157 jugadores con pais conocido):
+  #   Chile 33 · Argentina 16 · Mexico 15 · EEUU 11 · Colombia 8 · Uruguay 7 · Peru 6
+  #   Espana 4 · Bolivia, Honduras, Venezuela, Ecuador, Guatemala 3 · resto, cola larga.
+  #
+  # Cada titular usa un fenomeno que de verdad ocurre en ese sitio: aluviones en el norte de
+  # Chile, sudestada en el Rio de la Plata, huaicos en Peru, DANA en Espana. Inventar desastres
+  # genericos habria quedado igual de lejos que lo de Washington.
   news:
-  - '救援人员搭乘冲锋舟从洪灾的受灾房屋中救出了被困人员。'
-  - '在两县之间捕捉到了龙卷风的踪迹。'
-  - '德克萨斯州风暴: "从没见过这样的场景"'
-  - '威尼斯正在遭受洪涝灾害，一场致命性风暴席卷了意大利全境。'
-  - '镜头捕捉到了威尔士地区戏剧性的风暴。'
-  - '一场闪电风暴袭击了华盛顿特区。'
-  - '切尔诺贝利禁区的森林大火导致该地区辐射等级提升。'
-  - '卫星图像显示，南美洲三国边境地区的火势正逐步扩大。'
-  - '部分地区正在举行抗议挖煤的游行。'
-  - '部分国家开始建造更多环保能源发电机以减少污染排放。'
-  - '威尼斯洪水使整座城市关闭游船项目6天.'
-  - '赞比亚的下界之星反应堆由于过热而爆炸，目前非洲大陆均受到凋零效果的影响。'
+  # --- Chile ---
+  - 'Un aluvión corta la ruta en el norte y deja pueblos aislados por horas.'
+  - 'Ola de calor en la zona central: se baten registros de temperatura por tercer día seguido.'
+  - 'Marejadas anormales obligan a cerrar los puertos de la costa.'
+  - 'Los incendios forestales del sur avanzan sin control y ya se ven desde la carretera.'
+  - 'La sequía deja el embalse más bajo de lo que nadie recuerda.'
+  # --- Argentina ---
+  - 'Una sudestada inunda el conurbano y los vecinos sacan las lanchas.'
+  - 'Cae granizo del tamaño de una pelota de golf y arruina la cosecha en Mendoza.'
+  - 'La ola de calor obliga a cortar la luz por zonas en Buenos Aires.'
+  - 'La bajante del río deja los barcos varados en el puerto.'
+  # --- Mexico ---
+  - 'Un huracán categoría 4 se acerca a la costa y ordenan evacuar la zona baja.'
+  - 'La sequía en el norte deja las presas por debajo del 20%.'
+  - 'Las lluvias desbordan el río y el agua llega hasta los techos en Tabasco.'
+  # --- Colombia ---
+  - 'Un deslizamiento sepulta la vía y deja incomunicada a media región.'
+  - 'El río se desborda por tercera vez este mes y ya no hay dónde poner a la gente.'
+  # --- Uruguay ---
+  - 'La sequía obliga a mezclar agua salada en la red de Montevideo.'
+  # --- Peru ---
+  - 'Los huaicos arrasan con la carretera central y aíslan la sierra.'
+  - 'El Niño costero calienta el mar y la pesca desaparece de un día para otro.'
+  # --- resto de Latinoamerica ---
+  - 'Los incendios de la Chiquitanía llevan semanas ardiendo y el humo tapa el cielo en Bolivia.'
+  - 'Dos huracanes seguidos golpean Centroamérica y no da tiempo a reconstruir.'
+  - 'La lluvia no para en Venezuela y los deslizamientos dejan barrios enteros incomunicados.'
+  - 'Ecuador declara emergencia por las inundaciones en la costa.'
+  - 'La Amazonía registra su peor sequía: los ríos se pueden cruzar caminando.'
+  - 'Paraguay bate su récord de calor y suspenden las clases.'
+  # --- Espana y resto ---
+  - 'Una DANA descarga en horas la lluvia de un año entero sobre el Mediterráneo.'
+  - 'España encadena su tercera ola de calor del verano.'
+  - 'Un tornado atraviesa el medio oeste de Estados Unidos y las cámaras lo captan entero.'
+  # --- las de siempre, que siguen funcionando ---
+  - 'Marchas en varias ciudades contra la extracción de carbón.'
+  - 'Varios países empiezan a construir generadores más limpios para reducir emisiones.'
+  - 'Un reactor de estrella del Nether revienta por sobrecalentamiento: todo el continente con efecto Wither.'
