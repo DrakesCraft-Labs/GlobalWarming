@@ -70,11 +70,23 @@ pollution:
     animal-breed: 0.005
   # Lo que LIMPIA
   absorption:
-    # Maquinas que absorben contaminacion
+    # Maquinas que absorben contaminacion, por cada operacion completada.
+    #
+    # El Sumidero de Carbono es el unico con una cifra que se nota, y a proposito: es la maquina
+    # pensada para limpiar, tarda 12 segundos por ciclo y consume Bombonas de CO2, que a su vez
+    # hay que fabricar con carbono en el Compresor de Aire. A 0.5 por ciclo son 2,5 puntos por
+    # minuto: se ve moverse el Medidor de Calidad del Aire, pero limpiar un mundo muy sucio sigue
+    # siendo un proyecto de varias horas o de varias maquinas.
+    #
+    # Antes de esto la contaminacion solo subia. Los valores que habia (0.005 por arbol) eran
+    # decorativos: con los 1.370 puntos acumulados en el mundo de Slimefun habrian hecho falta
+    # mas de 270.000 arboles, y los jugadores lo notaron.
     machines:
       AIR_COMPRESSOR: 0.05
-    # Cada arbol que crece
-    tree-growth: 0.005
+      GW_SUMIDERO_CARBONO: 0.5
+    # Cada arbol que crece. Se sube de 0.005 a 0.02 para que reforestar cuente algo, sin que
+    # llegue a competir con la maquina: plantar sigue siendo el gesto lento.
+    tree-growth: 0.02
 temperature-options:
   # Cuanto sube la temperatura por punto de contaminacion
   pollution-multiply: 0.002

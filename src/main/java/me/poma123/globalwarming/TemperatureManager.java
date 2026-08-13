@@ -15,6 +15,7 @@ import com.github.drakescraft_labs.slimefun4.utils.biomes.BiomeMap;
 import me.poma123.globalwarming.api.biomes.BiomeTemperature;
 import me.poma123.globalwarming.api.PollutionManager;
 import me.poma123.globalwarming.api.Temperature;
+import me.poma123.globalwarming.eventos.RegistroClimatizadores;
 import me.poma123.globalwarming.api.TemperatureType;
 
 /**
@@ -60,6 +61,14 @@ public class TemperatureManager {
     public Temperature getTemperatureAtLocation(@Nonnull Location loc) {
         World world = loc.getWorld();
         Biome biome = loc.getBlock().getBiome();
+
+        // Un climatizador encendido manda sobre el clima del mundo dentro de su radio. Se mira
+        // antes que nada: si hay uno cubriendo este punto, da igual el bioma y lo que este
+        // pasando fuera.
+        Double climatizado = RegistroClimatizadores.objetivoEn(loc);
+        if (climatizado != null) {
+            return new Temperature(climatizado);
+        }
 
         Map<Biome, Double> map = worldTemperatureChangeFactorMap.get(world.getName());
 

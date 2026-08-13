@@ -76,6 +76,11 @@ final class Nevada {
             if (mundo.getHighestBlockYAt(x, z) > suelo.getY() + 1) {
                 continue;
             }
+            // Ni dentro del radio de un climatizador encendido: es la razon principal para
+            // construir uno, y sin esto la maquina solo cambiaria un numero en el termometro.
+            if (RegistroClimatizadores.estaCubierto(hueco.getLocation())) {
+                continue;
+            }
 
             hueco.setType(Material.SNOW, false);
         }

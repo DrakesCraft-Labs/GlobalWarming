@@ -22,6 +22,9 @@ public final class Items {
     public static final SlimefunItemStack MERCURY = new SlimefunItemStack("MERCURY", Material.GRAY_DYE, "&7Mercurio");
     public static final SlimefunItemStack FILTER = new SlimefunItemStack("AIR_COMPRESSOR_FILTER", Material.GUNPOWDER, "&7Filtro");
 
+    public static final SlimefunItemStack CLIMATIZADOR = new SlimefunItemStack("GW_CLIMATIZADOR", Material.BLUE_ICE, "&bClimatizador", "", "&7Mantiene su propio clima alrededor", "&7sin importar lo que pase fuera", "", "&aDentro de su radio no se posa nieve", "&ay la temperatura es la que le pongas", "", "&8&oRadio y temperatura se ajustan en Items.yml", "", LoreBuilder.machine(MachineTier.ADVANCED, MachineType.MACHINE), LoreBuilder.powerBuffer(512), LoreBuilder.powerPerSecond(24));
+    public static final SlimefunItemStack SUMIDERO_CARBONO = new SlimefunItemStack("GW_SUMIDERO_CARBONO", Material.DEEPSLATE_TILES, "&2Sumidero de Carbono", "", "&7Fija bajo tierra el CO\u2082 capturado", "&7y baja la contaminaci\u00f3n del mundo", "", "&aConsume Bombonas de CO\u2082", "&ay devuelve la bombona vac\u00eda", "", LoreBuilder.machine(MachineTier.ADVANCED, MachineType.MACHINE), LoreBuilder.powerBuffer(512), LoreBuilder.powerPerSecond(32));
+
     static {
         ItemStack item = new ItemStack(Material.POTION);
         ItemMeta meta = item.getItemMeta();

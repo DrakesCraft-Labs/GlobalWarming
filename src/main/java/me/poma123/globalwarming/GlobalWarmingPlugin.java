@@ -31,6 +31,8 @@ import me.poma123.globalwarming.api.TemperatureType;
 import me.poma123.globalwarming.commands.GlobalWarmingCommand;
 import me.poma123.globalwarming.items.CinnabariteResource;
 import me.poma123.globalwarming.items.machines.AirCompressor;
+import me.poma123.globalwarming.items.machines.SumideroCarbono;
+import me.poma123.globalwarming.items.machines.Climatizador;
 import me.poma123.globalwarming.items.machines.TemperatureMeter;
 import me.poma123.globalwarming.listeners.PollutionListener;
 import me.poma123.globalwarming.listeners.WorldListener;
@@ -188,6 +190,35 @@ public class GlobalWarmingPlugin extends JavaPlugin implements SlimefunAddon {
                 new ItemStack(Material.GLASS), SlimefunItems.GOLD_PAN, new ItemStack(Material.GLASS),
                 null, new ItemStack(Material.GLASS), null
         }).register(this);
+
+        // El climatizador va despues del compresor a proposito: la receta lleva un filtro y un
+        // motor, asi que no se llega a el sin haber pasado antes por la rama de la calidad del aire.
+        new Climatizador(itemGroup, Items.CLIMATIZADOR, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{
+                SlimefunItems.ALUMINUM_BRASS_INGOT, Items.FILTER, SlimefunItems.ALUMINUM_BRASS_INGOT,
+                SlimefunItems.COOLING_UNIT, SlimefunItems.ELECTRIC_MOTOR, SlimefunItems.HEATING_COIL,
+                SlimefunItems.ALUMINUM_BRASS_INGOT, SlimefunItems.BATTERY, SlimefunItems.ALUMINUM_BRASS_INGOT
+        }, 24, 512).register(this);
+
+        new SumideroCarbono(itemGroup, Items.SUMIDERO_CARBONO, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{
+                SlimefunItems.REINFORCED_ALLOY_INGOT, Items.CO2_CANISTER, SlimefunItems.REINFORCED_ALLOY_INGOT,
+                new ItemStack(Material.DEEPSLATE), SlimefunItems.CARBON_PRESS_3, new ItemStack(Material.DEEPSLATE),
+                SlimefunItems.REINFORCED_ALLOY_INGOT, SlimefunItems.BATTERY, SlimefunItems.REINFORCED_ALLOY_INGOT
+        }) {
+            @Override
+            public int getEnergyConsumption() {
+                return 32;
+            }
+
+            @Override
+            public int getCapacity() {
+                return 512;
+            }
+
+            @Override
+            public int getSpeed() {
+                return 1;
+            }
+        }.register(this);
     }
 
     private void registerResearches() {
@@ -197,6 +228,8 @@ public class GlobalWarmingPlugin extends JavaPlugin implements SlimefunAddon {
         registerResearch("canisters", 69696972, "Depósito de contaminación", 6, Items.EMPTY_CANISTER, Items.CO2_CANISTER);
         registerResearch("filter", 69696973, "Filtrado", 8, Items.FILTER);
         registerResearch("mercury", 69696973, "Mercurio", 12, Items.CINNABARITE, Items.MERCURY);
+        registerResearch("climatizador", 69696974, "Climatización", 45, Items.CLIMATIZADOR);
+        registerResearch("sumidero_carbono", 69696975, "Captura de carbono", 50, Items.SUMIDERO_CARBONO);
     }
 
     /**
