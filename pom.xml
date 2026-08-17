@@ -19,8 +19,13 @@
 
     <repositories>
         <repository>
+            <id>drakescraft-labs-maven</id>
+            <url>https://drakescraft-labs.github.io/maven-repo/</url>
+        </repository>
+
+        <repository>
             <id>paper-repo</id>
-            <url>https://repo.destroystokyo.com/repository/maven-public/</url>
+            <url>https://repo.papermc.io/repository/maven-public/</url>
         </repository>
 
         <repository>
@@ -142,23 +147,29 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.spigotmc</groupId>
-            <artifactId>spigot-api</artifactId>
-            <version>1.18.1-R0.1-SNAPSHOT</version>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.drakescraft_labs</groupId>
+            <artifactId>slimefun-core</artifactId>
+            <version>11.0-Drake-1.21.11-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
-            <groupId>com.github.Slimefun</groupId>
-            <artifactId>Slimefun4</artifactId>
-            <version>c1074faeb2</version>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot-api</artifactId>
+            <version>1.21.1-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>io.github.baked-libs</groupId>
-                    <artifactId>dough-api</artifactId>
-                </exclusion>
-            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.drakescraft_labs</groupId>
+            <artifactId>slimefun-core</artifactId>
+            <version>11.0-Drake-1.21.11-SNAPSHOT</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -175,11 +186,5 @@
             <scope>compile</scope>
         </dependency>
 
-        <dependency>
-            <groupId>net.guizhanss</groupId>
-            <artifactId>GuizhanLib</artifactId>
-            <version>0.5.1</version>
-            <scope>compile</scope>
-        </dependency>
     </dependencies>
 </project>

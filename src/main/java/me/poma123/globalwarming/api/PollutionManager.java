@@ -11,8 +11,8 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.inventory.ItemStack;
 
-import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
-import io.github.thebusybiscuit.slimefun4.libraries.dough.config.Config;
+import com.github.drakescraft_labs.slimefun4.api.items.SlimefunItem;
+import com.github.drakescraft_labs.slimefun4.libraries.dough.config.Config;
 
 import me.poma123.globalwarming.GlobalWarmingPlugin;
 import me.poma123.globalwarming.api.events.AsyncWorldPollutionChangeEvent;

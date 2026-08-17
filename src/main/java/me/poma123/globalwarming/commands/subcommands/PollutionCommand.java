@@ -5,8 +5,8 @@ import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import io.github.thebusybiscuit.slimefun4.libraries.dough.common.ChatColors;
-import io.github.thebusybiscuit.slimefun4.libraries.dough.common.CommonPatterns;
+import com.github.drakescraft_labs.slimefun4.libraries.dough.common.ChatColors;
+import com.github.drakescraft_labs.slimefun4.libraries.dough.common.CommonPatterns;
 
 import me.poma123.globalwarming.GlobalWarmingPlugin;
 import me.poma123.globalwarming.TemperatureManager;
@@ -17,7 +17,7 @@ import me.poma123.globalwarming.commands.SubCommand;
 class PollutionCommand extends SubCommand {
 
     PollutionCommand(GlobalWarmingPlugin plugin, GlobalWarmingCommand cmd) {
-        super(plugin, cmd, "pollution", "允许你手动修改污染值", false);
+        super(plugin, cmd, "pollution", "Le permite modificar manualmente los valores de contaminación.", false);
     }
 
     @Override
@@ -30,22 +30,22 @@ class PollutionCommand extends SubCommand {
                     if (args[1].equalsIgnoreCase("get")) {
                         double pollution = TemperatureManager.fixDouble(PollutionManager.getPollutionInWorld(world), 2);
 
-                        sender.sendMessage(ChatColors.color("&b世界 &a" + world.getName() + " &b的污染值为: &a" + pollution));
+                        sender.sendMessage(ChatColors.color("&bmundo &a" + world.getName() + " &bEl valor de la contaminación es: &a" + pollution));
                     } else if (args[1].equalsIgnoreCase("set")) {
                         if (args.length > 3) {
                             setPollution(sender, world, args);
                         } else {
-                            sender.sendMessage(ChatColors.color("&4用法: &c/globalwarming pollution <set> <world> <amount>"));
+                            sender.sendMessage(ChatColors.color("&4uso: &c/globalwarming pollution <set> <world> <amount>"));
                         }
                     }
                 } else {
-                    sender.sendMessage(ChatColors.color("&4该世界无法使用该指令"));
+                    sender.sendMessage(ChatColors.color("&4Este comando no se puede utilizar en este mundo."));
                 }
             } else {
-                sender.sendMessage(ChatColors.color("&用法: &c/globalwarming pollution <set|get> <world>"));
+                sender.sendMessage(ChatColors.color("&uso: &c/globalwarming pollution <set|get> <world>"));
             }
         } else {
-            sender.sendMessage(ChatColors.color("&4你没有足够的权限执行此命令"));
+            sender.sendMessage(ChatColors.color("&4No tienes permisos suficientes para ejecutar este comando"));
         }
     }
 
@@ -54,13 +54,13 @@ class PollutionCommand extends SubCommand {
 
         if (amount > -1) {
             if (PollutionManager.setPollutionInWorld(world, amount)) {
-                sender.sendMessage(ChatColors.color("&b已设置世界 '&a%world%&b' 的污染值为 '&a%newValue%&b'").replace("%newValue%", amount + "").replace("%world%", world.getName()));
+                sender.sendMessage(ChatColors.color("&bconjunto mundial '&a%world%&b' El valor de la contaminación es '&a%newValue%&b'").replace("%newValue%", amount + "").replace("%world%", world.getName()));
             } else {
                 // This is nearly impossible, but let us check
-                sender.sendMessage(ChatColors.color("&4该世界无法使用该指令"));
+                sender.sendMessage(ChatColors.color("&4Este comando no se puede utilizar en este mundo."));
             }
         } else {
-            sender.sendMessage(ChatColors.color("&4%amount% &c不是一个有效的值").replace("%amount%", amount + ""));
+            sender.sendMessage(ChatColors.color("&4%amount% &cno es un valor válido").replace("%amount%", amount + ""));
         }
     }
 

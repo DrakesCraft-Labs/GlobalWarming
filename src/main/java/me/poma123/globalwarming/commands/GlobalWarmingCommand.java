@@ -15,8 +15,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 
-import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
-import io.github.thebusybiscuit.slimefun4.libraries.dough.common.ChatColors;
+import com.github.drakescraft_labs.slimefun4.implementation.Slimefun;
+import com.github.drakescraft_labs.slimefun4.libraries.dough.common.ChatColors;
 
 import me.poma123.globalwarming.GlobalWarmingPlugin;
 import me.poma123.globalwarming.commands.subcommands.SubCommands;
@@ -32,7 +32,7 @@ public class GlobalWarmingCommand implements CommandExecutor, Listener {
     }
 
     public void register() {
-        Validate.isTrue(!registered, "GlobalWarming 的指令已注册!");
+        Validate.isTrue(!registered, "GlobalWarming las instrucciones han sido registradas!");
 
         registered = true;
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
@@ -67,7 +67,7 @@ public class GlobalWarmingCommand implements CommandExecutor, Listener {
 
     public void sendHelp(@Nonnull CommandSender sender) {
         sender.sendMessage("");
-        sender.sendMessage(ChatColors.color("&a全球变暖 &2v" + Slimefun.getVersion()));
+        sender.sendMessage(ChatColors.color("&acalentamiento global &2v" + Slimefun.getVersion()));
         sender.sendMessage("");
 
         for (SubCommand cmd : commands) {

@@ -12,8 +12,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import io.github.thebusybiscuit.slimefun4.api.player.PlayerProfile;
-import io.github.thebusybiscuit.slimefun4.api.researches.Research;
+import com.github.drakescraft_labs.slimefun4.api.player.PlayerProfile;
+import com.github.drakescraft_labs.slimefun4.api.researches.Research;
 
 import me.poma123.globalwarming.GlobalWarmingPlugin;
 import me.poma123.globalwarming.api.Temperature;
@@ -32,7 +32,7 @@ public class SlownessTask extends MechanicTask {
     }
 
     private void applyEffect(Player p, int duration, int amplifier) {
-        p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, duration, amplifier));
+        p.addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, duration, amplifier));
     }
 
     @Override
@@ -44,7 +44,7 @@ public class SlownessTask extends MechanicTask {
 
             if (w != null && GlobalWarmingPlugin.getRegistry().isWorldEnabled(w.getName()) && w.getEnvironment() == World.Environment.NORMAL && !w.getPlayers().isEmpty()) {
                 for (Player p : w.getPlayers()) {
-                    if (p.hasPotionEffect(PotionEffectType.SLOW)) {
+                    if (p.hasPotionEffect(PotionEffectType.SLOWNESS)) {
                         continue;
                     }
 

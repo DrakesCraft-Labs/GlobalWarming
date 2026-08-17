@@ -12,7 +12,7 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Biome;
 
-import io.github.thebusybiscuit.slimefun4.utils.biomes.BiomeMap;
+import com.github.drakescraft_labs.slimefun4.utils.biomes.BiomeMap;
 import me.poma123.globalwarming.api.biomes.BiomeTemperature;
 import me.poma123.globalwarming.api.PollutionManager;
 import me.poma123.globalwarming.api.Temperature;
@@ -73,13 +73,13 @@ public class TemperatureManager {
 
     public String getTemperatureString(@Nonnull Location loc, @Nonnull TemperatureType tempType) {
         if (!GlobalWarmingPlugin.getRegistry().isWorldEnabled(loc.getWorld().getName())) {
-            return "&c该世界不可用";
+            return "&cEl mundo no está disponible.";
         }
 
         Temperature temp = getTemperatureAtLocation(loc);
 
         if (temp == null) {
-            return "&7正在测量中...";
+            return "&7Medición...";
         }
 
         double celsiusValue = temp.getCelsiusValue();
@@ -105,7 +105,7 @@ public class TemperatureManager {
 
     public String getAirQualityString(@Nonnull World world, @Nonnull TemperatureType tempType) {
         if (!GlobalWarmingPlugin.getRegistry().isWorldEnabled(world.getName()) || world.getEnvironment() != World.Environment.NORMAL) {
-            return "&c该世界不可用";
+            return "&cEl mundo no está disponible.";
         }
 
         Temperature temp = new Temperature(15.0);

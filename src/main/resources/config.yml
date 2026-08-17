@@ -1,59 +1,59 @@
-# 自动更新
+# Actualizaciones automáticas
 options:
   auto-update: true
 
-# 启用或禁用的世界
+# Mundo habilitado o deshabilitado
 worlds:
 - disabled_world
 
-# 白名单 (whitelist) 或 黑名单 (blacklist) ，默认为黑名单模式
+# lista blanca (whitelist) o lista negra (blacklist) ，El valor predeterminado es el modo de lista negra
 world-filter-type: blacklist
 
-# 机制
+# mecanismo
 mechanics:
-  # 森林大火
+  # incendio forestal
   FOREST_FIRES:
-    # 是否启用
+    # Ya sea para habilitar
     enabled: true
-    # 几率 (0-1)
+    # probabilidad (0-1)
     chance: 0.3
-    # 火焰传播速度
+    # velocidad de propagación de la llama
     fire-per-second: 10
-    # 最低触发温度（摄氏度）
+    # Temperatura mínima de activación (Celsius）
     min-temperature-in-celsius: 40.0
-  # 冰川融化
+  # glaciares derritiéndose
   ICE_MELTING:
-    # 是否启用
+    # Ya sea para habilitar
     enabled: true
-    # 几率 (0-1)
+    # probabilidad (0-1)
     chance: 0.5
-    # 融化速度
+    # velocidad de fusión
     melt-per-second: 10
-    # 最低触发温度（摄氏度）
+    # Temperatura mínima de activación (Celsius）
     min-temperature-in-celsius: 2.0
-  # 减速
+  # desacelerar
   SLOWNESS:
-    # 是否启用
+    # Ya sea para habilitar
     enabled: true
-    # 几率 (0-1)
+    # probabilidad (0-1)
     chance: 0.8
-  # 燃烧
+  # combustión
   BURN:
-    # 是否启用
+    # Ya sea para habilitar
     enabled: true
-    # 几率
+    # probabilidad
     chance: 0.8
 
-# 进行全球变暖研究需要解锁的前置研究
+# Investigación preliminar que debe desbloquearse para realizar investigaciones sobre el calentamiento global
 needed-research-for-player-mechanics: ENERGY_REGULATOR
 
-# 污染设置
-# 机器相关ID可通过游戏内手持机器并使用指令/sf id查询
-# 原版物品ID: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html
+# Configuración de contaminación
+# Relacionado con la máquinaIDPuedes sostener la máquina en el juego y usar comandos./sf idConsulta
+# artículo originalID: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html
 pollution:
-  # 污染产生
+  # generación de contaminación
   production:
-    # 机器输入会产生的污染
+    # Contaminación causada por la entrada de la máquina.
     machine-recipe-input-items:
       CHARCOAL: 0.0025
       COAL: 0.005
@@ -69,23 +69,23 @@ pollution:
       BLISTERING_INGOT: 0.025
       BLISTERING_INGOT_2: 0.027
       BLISTERING_INGOT_3: 0.03
-    # 机器运作产生的污染
+    # Contaminación causada por el funcionamiento de las máquinas.
     machines:
       COAL_GENERATOR: 0.001
       COAL_GENERATOR_2: 0.0015
       NUCLEAR_REACTOR: 0.03
       COMBUSTION_REACTOR: 0.015
-    # 喂养动物产生的污染
+    # Contaminación por alimentar a los animales.
     animal-breed: 0.005
-  # 污染吸收
+  # absorción de contaminación
   absorption:
-    # 污染吸收机器
+    # máquina de absorción de contaminación
     machines:
       AIR_COMPRESSOR: 0.05
-    # 植树
+    # plantar arboles
     tree-growth: 0.005
 
-# 温度选项
+# Opciones de temperatura
 temperature-options:
   pollution-multiply: 0.002
   temperature-drop-during-storms: 8

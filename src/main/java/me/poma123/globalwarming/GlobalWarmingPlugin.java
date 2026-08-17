@@ -14,16 +14,16 @@ import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
-import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
-import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
-import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
-import io.github.thebusybiscuit.slimefun4.api.researches.Research;
-import io.github.thebusybiscuit.slimefun4.core.handlers.ItemConsumptionHandler;
-import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
-import io.github.thebusybiscuit.slimefun4.implementation.items.SimpleSlimefunItem;
-import io.github.thebusybiscuit.slimefun4.libraries.dough.config.Config;
-import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
+import com.github.drakescraft_labs.slimefun4.api.SlimefunAddon;
+import com.github.drakescraft_labs.slimefun4.api.items.ItemGroup;
+import com.github.drakescraft_labs.slimefun4.api.items.SlimefunItem;
+import com.github.drakescraft_labs.slimefun4.api.recipes.RecipeType;
+import com.github.drakescraft_labs.slimefun4.api.researches.Research;
+import com.github.drakescraft_labs.slimefun4.core.handlers.ItemConsumptionHandler;
+import com.github.drakescraft_labs.slimefun4.implementation.SlimefunItems;
+import com.github.drakescraft_labs.slimefun4.implementation.items.SimpleSlimefunItem;
+import com.github.drakescraft_labs.slimefun4.libraries.dough.config.Config;
+import com.github.drakescraft_labs.slimefun4.libraries.dough.items.CustomItemStack;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 
 import me.poma123.globalwarming.api.TemperatureType;
@@ -38,7 +38,6 @@ import me.poma123.globalwarming.tasks.FireTask;
 import me.poma123.globalwarming.tasks.MeltTask;
 import me.poma123.globalwarming.tasks.SlownessTask;
 
-import net.guizhanss.guizhanlib.updater.GuizhanBuildsUpdater;
 
 public class GlobalWarmingPlugin extends JavaPlugin implements SlimefunAddon {
 
@@ -55,7 +54,6 @@ public class GlobalWarmingPlugin extends JavaPlugin implements SlimefunAddon {
 
         if (getConfig().getBoolean("options.auto-update") &&
             getDescription().getVersion().startsWith("Build")) {
-            new GuizhanBuildsUpdater(this, getFile(), "ybw0014", "GlobalWarming-CN", "master", false).start();
         }
 
         new Metrics(this, 9132);
@@ -65,7 +63,7 @@ public class GlobalWarmingPlugin extends JavaPlugin implements SlimefunAddon {
             try {
                 Files.copy(this.getClass().getResourceAsStream("/messages.yml"), messagesFile.toPath());
             } catch (IOException e) {
-                getLogger().log(Level.SEVERE, "无法创建默认配置 messages.yml", e);
+                getLogger().log(Level.SEVERE, "No se puede crear la configuración predeterminada messages.yml", e);
             }
         }
         messages = new Config(this, "messages.yml");
@@ -81,7 +79,7 @@ public class GlobalWarmingPlugin extends JavaPlugin implements SlimefunAddon {
             try {
                 Files.copy(this.getClass().getResourceAsStream("/biome-maps/pre-1.18.json"), pre118BiomeMap.toPath());
             } catch (IOException e) {
-                getLogger().log(Level.SEVERE, "无法创建默认配置 biome-maps/pre-1.18.json", e);
+                getLogger().log(Level.SEVERE, "No se puede crear la configuración predeterminada biome-maps/pre-1.18.json", e);
             }
         }
 
@@ -90,7 +88,7 @@ public class GlobalWarmingPlugin extends JavaPlugin implements SlimefunAddon {
             try {
                 Files.copy(this.getClass().getResourceAsStream("/biome-maps/post-1.18.json"), post118BiomeMap.toPath());
             } catch (IOException e) {
-                getLogger().log(Level.SEVERE, "无法创建默认配置 biome-maps/post-1.18.json", e);
+                getLogger().log(Level.SEVERE, "No se puede crear la configuración predeterminada biome-maps/post-1.18.json", e);
             }
         }
 
@@ -105,7 +103,7 @@ public class GlobalWarmingPlugin extends JavaPlugin implements SlimefunAddon {
     }
 
     private void registerItems() {
-        ItemGroup itemGroup = new ItemGroup(new NamespacedKey(this, "global_warming"), new CustomItemStack(Items.THERMOMETER, "&2全球变暖"));
+        ItemGroup itemGroup = new ItemGroup(new NamespacedKey(this, "global_warming"), new CustomItemStack(Items.THERMOMETER, "&2calentamiento global"));
 
         new TemperatureMeter(itemGroup, Items.THERMOMETER, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] {
                 SlimefunItems.NICKEL_INGOT, new ItemStack(Material.GLASS), SlimefunItems.NICKEL_INGOT,
@@ -127,7 +125,7 @@ public class GlobalWarmingPlugin extends JavaPlugin implements SlimefunAddon {
             @Override
             public void tick(Block b) {
                 Location loc = b.getLocation();
-                updateHologram(b, "&7环境变化: " + GlobalWarmingPlugin.getTemperatureManager().getAirQualityString(loc.getWorld(), TemperatureType.valueOf(BlockStorage.getLocationInfo(loc, "type"))));
+                updateHologram(b, "&7cambios ambientales: " + GlobalWarmingPlugin.getTemperatureManager().getAirQualityString(loc.getWorld(), TemperatureType.valueOf(BlockStorage.getLocationInfo(loc, "type"))));
             }
         }.register(this);
 
@@ -186,12 +184,12 @@ public class GlobalWarmingPlugin extends JavaPlugin implements SlimefunAddon {
     }
 
     private void registerResearches() {
-        registerResearch("thermometer", 69696969, "温度计", 10, Items.THERMOMETER);
-        registerResearch("air_quality_meter", 69696970, "空气质量监测仪", 30, Items.AIR_QUALITY_METER);
-        registerResearch("air_compressor", 69696971, "空气压缩机", 40, Items.AIR_COMPRESSOR);
-        registerResearch("canisters", 69696972, "污染存储", 6, Items.EMPTY_CANISTER, Items.CO2_CANISTER);
-        registerResearch("filter", 69696973, "过滤", 8, Items.FILTER);
-        registerResearch("mercury", 69696973, "水银", 12, Items.CINNABARITE, Items.MERCURY);
+        registerResearch("thermometer", 69696969, "termómetro", 10, Items.THERMOMETER);
+        registerResearch("air_quality_meter", 69696970, "monitor de calidad del aire", 30, Items.AIR_QUALITY_METER);
+        registerResearch("air_compressor", 69696971, "compresor de aire", 40, Items.AIR_COMPRESSOR);
+        registerResearch("canisters", 69696972, "almacenamiento contaminado", 6, Items.EMPTY_CANISTER, Items.CO2_CANISTER);
+        registerResearch("filter", 69696973, "filtrar", 8, Items.FILTER);
+        registerResearch("mercury", 69696973, "mercurio", 12, Items.CINNABARITE, Items.MERCURY);
     }
 
     private void scheduleTasks() {

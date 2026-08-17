@@ -9,7 +9,7 @@ import org.bukkit.World;
 import org.bukkit.block.Biome;
 import org.bukkit.inventory.ItemStack;
 
-import io.github.thebusybiscuit.slimefun4.api.geo.GEOResource;
+import com.github.drakescraft_labs.slimefun4.api.geo.GEOResource;
 
 import me.poma123.globalwarming.GlobalWarmingPlugin;
 import me.poma123.globalwarming.Items;
@@ -35,7 +35,7 @@ public class CinnabariteResource implements GEOResource {
     @Nonnull
     @Override
     public String getName() {
-        return "朱砂";
+        return "cinabrio";
     }
 
     @Nonnull

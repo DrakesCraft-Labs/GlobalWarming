@@ -26,13 +26,13 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.World;
 import org.bukkit.block.Biome;
 
-import io.github.thebusybiscuit.slimefun4.api.MinecraftVersion;
-import io.github.thebusybiscuit.slimefun4.api.exceptions.BiomeMapException;
-import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
-import io.github.thebusybiscuit.slimefun4.api.researches.Research;
-import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
-import io.github.thebusybiscuit.slimefun4.libraries.dough.config.Config;
-import io.github.thebusybiscuit.slimefun4.utils.biomes.BiomeMap;
+import com.github.drakescraft_labs.slimefun4.api.MinecraftVersion;
+import com.github.drakescraft_labs.slimefun4.api.exceptions.BiomeMapException;
+import com.github.drakescraft_labs.slimefun4.api.items.SlimefunItem;
+import com.github.drakescraft_labs.slimefun4.api.researches.Research;
+import com.github.drakescraft_labs.slimefun4.implementation.Slimefun;
+import com.github.drakescraft_labs.slimefun4.libraries.dough.config.Config;
+import com.github.drakescraft_labs.slimefun4.utils.biomes.BiomeMap;
 
 import me.poma123.globalwarming.api.biomes.BiomeTemperature;
 import me.poma123.globalwarming.api.biomes.BiomeTemperatureDataConverter;
@@ -62,7 +62,7 @@ public class Registry {
             this.biomeMap = loadBiomeMap(false);
         }
         catch (BiomeMapException | FileNotFoundException x) {
-            GlobalWarmingPlugin.getInstance().getLogger().log(Level.WARNING, x, () -> "无法加载生物群系地图 /plugins/GlobalWarming/biome-maps/, 使用默认设置");
+            GlobalWarmingPlugin.getInstance().getLogger().log(Level.WARNING, x, () -> "No se puede cargar el mapa del bioma /plugins/GlobalWarming/biome-maps/, Usar la configuración predeterminada");
         }
 
         if (biomeMap == null) {
@@ -70,7 +70,7 @@ public class Registry {
                 this.biomeMap = loadBiomeMap(true);
             }
             catch (BiomeMapException | FileNotFoundException x) {
-                GlobalWarmingPlugin.getInstance().getLogger().log(Level.WARNING, x, () -> "无法应用默认生物群系地图，请重新安装 GlobalWarming.");
+                GlobalWarmingPlugin.getInstance().getLogger().log(Level.WARNING, x, () -> "No se puede aplicar el mapa de bioma predeterminado; reinstálelo GlobalWarming.");
                 GlobalWarmingPlugin.getInstance().getServer().getPluginManager().disablePlugin(GlobalWarmingPlugin.getInstance());
             }
         }
@@ -84,7 +84,7 @@ public class Registry {
         }
         if (!missingBiomes.isEmpty()) {
             String path = biomeMap.getKey().getKey().replace("globalwarming_biomemap_", "");
-            GlobalWarmingPlugin.getInstance().getLogger().log(Level.WARNING, "生物群系地图(\" + path + \")中，这些生物群系没有设置温度: \"{0}\"，将使用默认温度设置 (temp=15, max-temp-drop-at-night=0).", new Object[] {String.join(", ", missingBiomes)});
+            GlobalWarmingPlugin.getInstance().getLogger().log(Level.WARNING, "mapa del bioma(\" + path + \"), estos biomas no tienen temperaturas establecidas: \"{0}\"，Se utilizarán los ajustes de temperatura predeterminados. (temp=15, max-temp-drop-at-night=0).", new Object[] {String.join(", ", missingBiomes)});
         }
 
         // Whitelisting or blacklisting worlds
@@ -101,7 +101,7 @@ public class Registry {
             worldFilterType = WorldFilterType.valueOf((cfg.getOrSetDefault("world-filter-type", "blacklist")).toUpperCase(Locale.ROOT));
         } catch (IllegalArgumentException ex) {
             worldFilterType = WorldFilterType.BLACKLIST;
-            GlobalWarmingPlugin.getInstance().getLogger().log(Level.WARNING, "\"{0}\" 不是一个有效的世界过滤器类型。正在使用默认值 (blacklist)", new Object[] { cfg.getString("world-filter-type") });
+            GlobalWarmingPlugin.getInstance().getLogger().log(Level.WARNING, "\"{0}\" No es un tipo de filtro mundial válido. Usando el valor predeterminado (blacklist)", new Object[] { cfg.getString("world-filter-type") });
         }
 
         worlds.addAll(cfg.getStringList("worlds"));
@@ -118,7 +118,7 @@ public class Registry {
                 double value = cfg.getDouble("pollution.production.machine-recipe-input-items." + id);
 
                 if (value <= 0.0) {
-                    GlobalWarmingPlugin.getInstance().getLogger().log(Level.WARNING, "无法加载污染值为 \"{1}\" 的无效污染物品 \"{0}\"", new Object[] { id, value });
+                    GlobalWarmingPlugin.getInstance().getLogger().log(Level.WARNING, "No se puede cargar el valor de contaminación para \"{1}\" de artículos contaminados no válidos \"{0}\"", new Object[] { id, value });
                     continue;
                 }
 
@@ -127,7 +127,7 @@ public class Registry {
                 } else if (SlimefunItem.getById(id) != null) {
                     pollutedSlimefunItems.put(id, value);
                 } else {
-                    GlobalWarmingPlugin.getInstance().getLogger().log(Level.WARNING, "无法加载污染值为 \"{1}\" 的不存在的污染物品 \"{0}\"", new Object[] { id, value });
+                    GlobalWarmingPlugin.getInstance().getLogger().log(Level.WARNING, "No se puede cargar el valor de contaminación para \"{1}\" de contaminantes inexistentes \"{0}\"", new Object[] { id, value });
                 }
             }
 
@@ -136,14 +136,14 @@ public class Registry {
                 double value = cfg.getDouble("pollution.production.machines." + id);
 
                 if (value <= 0.0) {
-                    GlobalWarmingPlugin.getInstance().getLogger().log(Level.WARNING, "无法加载污染值为 \"{1}\" 的无效污染机器 \"{0}\"", new Object[] { id, value });
+                    GlobalWarmingPlugin.getInstance().getLogger().log(Level.WARNING, "No se puede cargar el valor de contaminación para \"{1}\" de máquinas contaminantes ineficaces \"{0}\"", new Object[] { id, value });
                     continue;
                 }
 
                 if (SlimefunItem.getById(id) != null) {
                     pollutedSlimefunMachines.put(id, value);
                 } else {
-                    GlobalWarmingPlugin.getInstance().getLogger().log(Level.WARNING, "无法加载污染值为 \"{1}\" 的不存在的污染机器 \"{0}\"", new Object[] { id, value });
+                    GlobalWarmingPlugin.getInstance().getLogger().log(Level.WARNING, "No se puede cargar el valor de contaminación para \"{1}\" La máquina contaminante inexistente \"{0}\"", new Object[] { id, value });
                 }
             }
 
@@ -152,14 +152,14 @@ public class Registry {
                 double value = cfg.getDouble("pollution.absorption.machines." + id);
 
                 if (value <= 0.0) {
-                    GlobalWarmingPlugin.getInstance().getLogger().log(Level.WARNING, "无法加载吸收值为 \"{1}\" 的无效吸收机器 \"{0}\"", new Object[] { id, value });
+                    GlobalWarmingPlugin.getInstance().getLogger().log(Level.WARNING, "No se puede cargar el valor de absorción para \"{1}\" máquina de absorción ineficaz \"{0}\"", new Object[] { id, value });
                     continue;
                 }
 
                 if (SlimefunItem.getById(id) != null) {
                     absorbentSlimefunMachines.put(id, value);
                 } else {
-                    GlobalWarmingPlugin.getInstance().getLogger().log(Level.WARNING, "无法加载吸收值为 \"{1}\" 的不存在的吸收机器 \"{0}\"", new Object[] { id, value });
+                    GlobalWarmingPlugin.getInstance().getLogger().log(Level.WARNING, "No se puede cargar el valor de absorción para \"{1}\" La máquina de absorción inexistente \"{0}\"", new Object[] { id, value });
                 }
             }
         }, 100);
