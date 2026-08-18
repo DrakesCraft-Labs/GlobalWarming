@@ -1,4 +1,4 @@
-<p align="center"><img src="docs/banner.svg" alt="GlobalWarming" width="100%"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/DrakesCraft-Labs/GlobalWarming/main/banner.svg" alt="GlobalWarming" width="100%"></p>
 
 # GlobalWarming
 
