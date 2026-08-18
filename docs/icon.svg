@@ -5,27 +5,18 @@
       <stop offset="100%" stop-color="#131C2E"/>
     </linearGradient>
     <linearGradient id="acG" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#F97316"/>
-      <stop offset="100%" stop-color="#38BDF8"/>
+      <stop offset="0%" stop-color="#14B8A6"/>
+      <stop offset="100%" stop-color="#5EEAD4"/>
     </linearGradient>
     <radialGradient id="halo" cx="50%" cy="42%" r="55%">
-      <stop offset="0%" stop-color="#F97316" stop-opacity="0.28"/>
-      <stop offset="100%" stop-color="#F97316" stop-opacity="0"/>
+      <stop offset="0%" stop-color="#14B8A6" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#14B8A6" stop-opacity="0"/>
     </radialGradient>
   </defs>
-
-  <!-- Fondo redondeado: Modrinth recorta a circulo en las tarjetas, asi que el contenido
-       importante se mantiene dentro del 70% central para que no se pierda al recortar. -->
   <rect width="512" height="512" rx="96" fill="url(#fondo)"/>
   <rect width="512" height="512" rx="96" fill="url(#halo)"/>
   <rect x="4" y="4" width="504" height="504" rx="92" fill="none" stroke="url(#acG)" stroke-width="6" opacity="0.55"/>
-
-  <g transform="translate(256,248) scale(2.45)">
-
-    <rect x="-9" y="-42" width="18" height="52" rx="9" fill="#0F172A" stroke="url(#acG)" stroke-width="3.5"/>
-    <circle cx="0" cy="22" r="16" fill="#0F172A" stroke="url(#acG)" stroke-width="3.5"/>
-    <circle cx="0" cy="22" r="9" fill="#F97316"/>
-    <rect x="-3" y="-16" width="6" height="34" rx="3" fill="#F97316"/>
-    <path d="M 14 -30 L 24 -30 M 14 -18 L 24 -18 M 14 -6 L 24 -6" stroke="#38BDF8" stroke-width="2.5" stroke-linecap="round"/>
+  <g transform="translate(256,248) scale(2.6)">
+<circle cx="0" cy="0" r="26" fill="none" stroke="url(#acG)" stroke-width="4"/><path d="M-18,6 C-10,-8 10,-8 18,6" stroke="#5EEAD4" stroke-width="3" fill="none"/><circle cx="0" cy="-6" r="6" fill="#14B8A6"/>
   </g>
 </svg>

@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/DrakesCraft-Labs/GlobalWarming/master/docs/banner.svg" width="100%" alt="GLOBALWARMING Animated Banner" />
+  <img src="https://raw.githubusercontent.com/DrakesCraft-Labs/GlobalWarming/master/banner.svg" width="100%" alt="GLOBALWARMING Animated Banner" />
 </p>
 
 # GlobalWarming
