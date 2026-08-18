@@ -126,3 +126,49 @@ if (process.env.GITHUB_OUTPUT) {
   appendFileSync(process.env.GITHUB_OUTPUT, `project_slug=${proyecto.slug}\n`);
 }
 console.log(`Proyecto en uso: ${proyecto.slug} (${proyecto.id})`);
+
+// --- Icono del proyecto -----------------------------------------------------------------
+// mc-publish sube el jar pero no toca el icono, y Modrinth muestra un cubo gris por defecto en
+// el buscador. El icono se genera una sola vez y vive en el repo (docs/icon.svg); aqui solo se
+// sube si el proyecto aun no tiene ninguno, para no pisar uno cambiado a mano desde la web.
+try {
+  const rutaIcono = 'docs/icon.svg';
+  if (existsSync(rutaIcono) && !proyecto.icon_url) {
+    const svg = readFileSync(rutaIcono);
+    const r = await fetch(`${V2}/project/${proyecto.id}/icon?ext=svg`, {
+      method: 'PATCH',
+      headers: { ...cabeceras, 'Content-Type': 'image/svg+xml' },
+      body: svg,
+    });
+    if (r.ok) {
+      console.log('Icono subido.');
+    } else {
+      // Modrinth rechaza algunos SVG en el icono. Se deja constancia del motivo en vez de un
+      // codigo suelto, para saber si hay que pasar a PNG.
+      console.error(`No se pudo subir el icono (HTTP ${r.status}): ${(await r.text()).slice(0, 200)}`);
+    }
+  }
+} catch (e) {
+  console.error('Fallo al subir el icono:', e.message);
+}
+
+// --- Descripcion larga ------------------------------------------------------------------
+// mc-publish v3.3 no admite modrinth-description-*: avisa de "Unexpected input" y no la toca,
+// asi que la pagina se quedaba con la descripcion de la creacion. Se sincroniza aqui con el
+// README, que es lo que el jugador lee en Modrinth.
+try {
+  if (existsSync('README.md')) {
+    const cuerpo = readFileSync('README.md', 'utf8');
+    if (cuerpo.trim() && cuerpo !== proyecto.body) {
+      const r = await fetch(`${V2}/project/${proyecto.id}`, {
+        method: 'PATCH',
+        headers: { ...cabeceras, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ body: cuerpo }),
+      });
+      console.log(r.ok ? 'Descripcion sincronizada con el README.'
+                       : `No se pudo actualizar la descripcion (HTTP ${r.status}).`);
+    }
+  }
+} catch (e) {
+  console.error('Fallo al sincronizar la descripcion:', e.message);
+}
