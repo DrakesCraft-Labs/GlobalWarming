@@ -76,3 +76,13 @@ tocar la configuración, no cambia nada del juego más allá de poder medir.
 
 El trabajo de fondo es de **poma123**. Licencia **MIT**, conservada sin modificar. Los detalles
 están en [UPSTREAM.md](UPSTREAM.md).
+
+## ⚖️ Upstream Attribution & License / Licencia y Créditos
+
+- **Original Project / Upstream**: Slimefun4 Community Addon.
+- **Port & Maintenance**: DrakesCraft Labs team (Compatibility for Paper / Purpur 1.21.11).
+- **License**: GPL-3.0 / MIT.
+- **Source Code**: [GitHub Repository](https://github.com/DrakesCraft-Labs/GlobalWarming)
+- **Support & Issues**: [GitHub Issues](https://github.com/DrakesCraft-Labs/GlobalWarming/issues) | [Discord](https://discord.gg/rR7FbfCt9Y)
+
+*This project is an open-source derivative work maintained by DrakesCraft Labs under the terms of its original license. All original assets and concepts belong to their respective creators.*
